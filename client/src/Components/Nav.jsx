@@ -6,16 +6,19 @@ export default function Nav({ open }) {
 
   const handleDashboard = async () => {
     console.log(localStorage.authToken);
-    const response = await fetch("http://localhost:3001/dashboard/dashboard", {
-      method: "POST",
-      body: JSON.stringify({ Token: localStorage.authToken }),
-      mode: "cors",
-      headers: {
-        "Content-type": "application/json",
-      },
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER}/dashboard/dashboard`,
+      {
+        method: "POST",
+        body: JSON.stringify({ Token: localStorage.authToken }),
+        mode: "cors",
+        headers: {
+          "Content-type": "application/json",
+        },
 
-      header: "Access-Control-Allow-Origin: *",
-    });
+        header: "Access-Control-Allow-Origin: *",
+      }
+    );
     json = await response.json();
     console.log("response we get");
     console.log(json);

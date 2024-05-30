@@ -14,13 +14,16 @@ export default function Signup({ closemod }) {
       email: credentials.email,
       password: credentials.password,
     };
-    const response = await fetch("http://localhost:3001/register/Signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER}/register/Signup`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
     //  const json=response.json();
     const data = await response.text();
     //  console.log(data);

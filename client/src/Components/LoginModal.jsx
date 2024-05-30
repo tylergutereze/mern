@@ -16,20 +16,23 @@ export default function LoginModal({ closemod }) {
   const [loggedin, setloggedin] = useState(false);
 
   const eventHandler = async () => {
-    const response = await fetch("http://localhost:3001/register/creatuser", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        first_name: credentials.first_name,
-        last_name: credentials.last_name,
-        age: credentials.age,
-        mob: credentials.mob,
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER}/register/creatuser"`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          first_name: credentials.first_name,
+          last_name: credentials.last_name,
+          age: credentials.age,
+          mob: credentials.mob,
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      }
+    );
     const json = await response.json();
     console.log(json);
 
