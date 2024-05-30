@@ -40,18 +40,16 @@ export default function ModalTransactions({ fun }) {
           <div className="mt-7">
             <div className="flex justify-between font-semibold text-black text-center text-[17px] md:text-[17px] mb-2">
               <div>Amount: </div>
-              <div>₹ {fun.data.Amount}</div>
+              <div>Є {fun.data.Amount}</div>
             </div>
             <div className="flex justify-between font-semibold text-black text-center text-[17px] md:text-[17px] mb-2">
               <div>Prise: </div>
-              <div>₹ {fun.data.Prise}</div>
+              <div>Є {fun.data.Prise}</div>
             </div>
             <div className="flex flex-col justify-start font-semibold md:grid grid-cols-2 text-black text-center text-[17px] md:text-[17px] mb-2">
               <div className="text-left">Quantity: </div>
               <div className="text-left md:text-right">{fun.data.Quantity}</div>
             </div>
-
-            
           </div>
         </div>
       </div>

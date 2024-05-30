@@ -16,7 +16,7 @@ export default function LoginModal({ closemod }) {
   const [loggedin, setloggedin] = useState(false);
 
   const eventHandler = async () => {
-    const response = await fetch("https://cryptofolio-backstack-aiwo.onrender.com/register/creatuser", {
+    const response = await fetch("http://localhost:3001/register/creatuser", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -35,8 +35,7 @@ export default function LoginModal({ closemod }) {
 
     if (json.userexist) {
       alert("user already exist");
-    } 
-    else {
+    } else {
       if (!json.success) {
         alert("enter correct credentials");
       } else {

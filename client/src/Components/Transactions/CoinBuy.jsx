@@ -18,19 +18,16 @@ export default function CoinBuy() {
 
   const [id, setid] = useState();
   const getid = async () => {
-    const response = await fetch(
-      "https://cryptofolio-backstack-aiwo.onrender.com/dashboard/dashboard",
-      {
-        method: "POST",
-        body: JSON.stringify({ Token: localStorage.authToken }),
-        mode: "cors",
-        headers: {
-          "Content-type": "application/json",
-        },
+    const response = await fetch("http://localhost:3001/dashboard/dashboard", {
+      method: "POST",
+      body: JSON.stringify({ Token: localStorage.authToken }),
+      mode: "cors",
+      headers: {
+        "Content-type": "application/json",
+      },
 
-        header: "Access-Control-Allow-Origin: *",
-      }
-    );
+      header: "Access-Control-Allow-Origin: *",
+    });
     let json = await response.json();
     console.log("response we get");
     console.log(json);
@@ -42,10 +39,10 @@ export default function CoinBuy() {
 
   useEffect(() => {
     setcurrprise(
-      ((`${state.data.current_price}` / 100) * 70).toLocaleString("en-IN", {
+      (`${state.data.current_price}` / 1.08).toLocaleString("en-IN", {
         maximumFractionDigits: 2,
         style: "currency",
-        currency: "INR",
+        currency: "EUR",
       })
     );
 
@@ -69,7 +66,7 @@ export default function CoinBuy() {
   const getallTransaction = async () => {
     await axios({
       method: "POST",
-      url: "https://cryptofolio-backstack-aiwo.onrender.com/wallet/getwalletTransaction",
+      url: "http://localhost:3001/wallet/getwalletTransaction",
       data: {
         login: login,
       },
@@ -90,7 +87,7 @@ export default function CoinBuy() {
   const getamount = async () => {
     await axios({
       method: "POST",
-      url: "https://cryptofolio-backstack-aiwo.onrender.com/wallet/getwalletAmount",
+      url: "http://localhost:3001/wallet/getwalletAmount",
       data: {
         login: login,
       },
@@ -118,24 +115,24 @@ export default function CoinBuy() {
         CoinId: state.data.id,
         CoinName: state.data.name,
         Quantity: Quantity,
-        Amount: (`${state.data.current_price}` / 100) * 70 * Quantity,
+        Amount: (`${state.data.current_price}` / 1.08) * Quantity,
         Date: new Date(),
-        Prise: (`${state.data.current_price}` / 100) * 70,
+        Prise: `${state.data.current_price}` / 1.08,
         type: "Buy",
       };
 
       allTransaction.push(object);
       console.log(allTransaction);
 
-      console.log((`${state.data.current_price}` / 100) * 70 * Quantity);
+      console.log((`${state.data.current_price}` / 1.08) * Quantity);
       console.log(currBalance);
 
       const response = await axios({
         method: "POST",
-        url: "https://cryptofolio-backstack-aiwo.onrender.com/transactions/transactions",
+        url: "http://localhost:3001/transactions/transactions",
         data: {
           Quantity: Quantity,
-          Amount: (`${state.data.current_price}` / 100) * 70 * Quantity,
+          Amount: (`${state.data.current_price}` / 1.08) * Quantity,
           login: login,
           CoinName: data.name,
           Transaction: allTransaction,
@@ -163,18 +160,17 @@ export default function CoinBuy() {
   const getusertransaction_byAmount = async () => {
     await getamount();
 
-    console.log((`${state.data.current_price}` / 100) * 70 * Quantity);
+    console.log((`${state.data.current_price}` / 1.08) * Quantity);
     console.log(currBalance);
 
     let object = {
       img: state.data.image,
       CoinId: state.data.id,
       CoinName: state.data.name,
-      Quantity:
-        Amount_for_amount / ((`${state.data.current_price}` / 100) * 70),
+      Quantity: Amount_for_amount / (`${state.data.current_price}` / 1.08),
       Amount: Amount_for_amount,
       Date: new Date(),
-      Prise: (`${state.data.current_price}` / 100) * 70,
+      Prise: `${state.data.current_price}` / 1.08,
       type: "Buy",
     };
 
@@ -182,10 +178,9 @@ export default function CoinBuy() {
 
     const response = await axios({
       method: "POST",
-      url: "https://cryptofolio-backstack-aiwo.onrender.com/transactions/transactions",
+      url: "http://localhost:3001/transactions/transactions",
       data: {
-        Quantity:
-          Amount_for_amount / ((`${state.data.current_price}` / 100) * 70),
+        Quantity: Amount_for_amount / (`${state.data.current_price}` / 1.08),
         Amount: Amount_for_amount,
         login: login,
         CoinName: data.name,
@@ -226,12 +221,12 @@ export default function CoinBuy() {
 
   useEffect(() => {
     setAmount(
-      ((`${state.data.current_price}` / 100) * 70 * Quantity).toLocaleString(
+      ((`${state.data.current_price}` / 1.08) * Quantity).toLocaleString(
         "en-IN",
         {
           maximumFractionDigits: 2,
           style: "currency",
-          currency: "INR",
+          currency: "EUR",
         }
       )
     );
@@ -256,7 +251,7 @@ export default function CoinBuy() {
 
   useEffect(() => {
     setQuantity_for_amount(
-      Amount_for_amount / ((`${state.data.current_price}` / 100) * 70)
+      Amount_for_amount / (`${state.data.current_price}` / 1.08)
     );
   }, [Amount_for_amount]);
 

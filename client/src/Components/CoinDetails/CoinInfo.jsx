@@ -6,7 +6,7 @@ export default function CoinInfo({ state, open }) {
   const data = state.value;
   console.log(data);
   const [Coindata, setCoindata] = useState({});
-  const [currencyRupee, setcurrencyRupee] = useState(true);
+  const [currencyEuro, setcurrencyEuro] = useState(true);
   const [clicked, setclicked] = useState(false);
 
   const login = localStorage.getItem("authToken");
@@ -28,7 +28,6 @@ export default function CoinInfo({ state, open }) {
     } else {
       open[1](true);
     }
-    
   };
 
   const handlesell = () => {
@@ -39,73 +38,68 @@ export default function CoinInfo({ state, open }) {
     } else {
       open[1](true);
     }
-    
   };
 
   useEffect(() => {
-    if (currencyRupee === true) {
+    if (currencyEuro === true) {
       setCoindata({
-        current_price: ((`${data.current_price}` / 100) * 70).toLocaleString(
+        current_price: (`${data.current_price}` / 1.08).toLocaleString(
           "en-IN",
           {
             maximumFractionDigits: 2,
             style: "currency",
-            currency: "INR",
+            currency: "EUR",
           }
         ),
-        high: ((`${data.high_24h}` / 100) * 70).toLocaleString("en-IN", {
+        high: (`${data.high_24h}` / 1.08).toLocaleString("en-IN", {
           maximumFractionDigits: 2,
           style: "currency",
-          currency: "INR",
+          currency: "EUR",
         }),
-        low: ((`${data.low_24h}` / 100) * 70).toLocaleString("en-IN", {
+        low: (`${data.low_24h}` / 1.08).toLocaleString("en-IN", {
           maximumFractionDigits: 2,
           style: "currency",
-          currency: "INR",
+          currency: "EUR",
         }),
-        priceChange: ((`${data.price_change_24h}` / 100) * 70).toLocaleString(
+        priceChange: (`${data.price_change_24h}` / 1.08).toLocaleString(
           "en-IN",
           {
             maximumFractionDigits: 2,
             style: "currency",
-            currency: "INR",
+            currency: "EUR",
           }
         ),
         pricePercentageChange: `${data.price_change_percentage_24h}`,
       });
     } else {
       setCoindata({
-        current_price: (`${data.current_price}` / 100).toLocaleString("en-US", {
+        current_price: `${data.current_price}`.toLocaleString("en-US", {
           maximumFractionDigits: 2,
           style: "currency",
           currency: "USD",
         }),
-        high: (`${data.high_24h}` / 100).toLocaleString("en-US", {
+        high: `${data.high_24h}`.toLocaleString("en-US", {
           maximumFractionDigits: 2,
           style: "currency",
           currency: "USD",
         }),
-        low: (`${data.low_24h}` / 100).toLocaleString("en-US", {
+        low: `${data.low_24h}`.toLocaleString("en-US", {
           maximumFractionDigits: 2,
           style: "currency",
           currency: "USD",
         }),
-        priceChange: (`${data.price_change_24h}` / 100).toLocaleString(
-          "en-IN",
-          {
-            maximumFractionDigits: 2,
-            style: "currency",
-            currency: "USD",
-          }
-        ),
+        priceChange: `${data.price_change_24h}`.toLocaleString("en-IN", {
+          maximumFractionDigits: 2,
+          style: "currency",
+          currency: "USD",
+        }),
         pricePercentageChange: `${data.price_change_percentage_24h}`,
       });
     }
     check();
-    
-  }, [currencyRupee,login]);
+  }, [currencyEuro, login]);
 
-  console.log(currencyRupee);
+  console.log(currencyEuro);
   console.log(Coindata);
   // console.log(data.price_change_24h);
 
@@ -159,20 +153,20 @@ export default function CoinInfo({ state, open }) {
           <div className="w-[100%]  grid grid-cols-1 sm:grid-cols-2 ">
             <button
               className={`${
-                currencyRupee ? "bg-[#209fe4] " : "bg-[#209fe423] text-[12px]"
+                currencyEuro ? "bg-[#209fe4] " : "bg-[#209fe423] text-[12px]"
               } p-1 m-2  rounded-md font-semibold text-[12px] md:text-[15px]`}
               onClick={() => {
-                setcurrencyRupee(true);
+                setcurrencyEuro(true);
               }}
             >
-              RUPEE
+              EURO
             </button>
             <button
               className={`${
-                currencyRupee ? "bg-[#209fe423] text-[12px]" : "bg-[#209fe4] "
+                currencyEuro ? "bg-[#209fe423] text-[12px]" : "bg-[#209fe4] "
               } p-1 m-2 rounded-md font-semibold text-[12px] md:text-[15px]`}
               onClick={() => {
-                setcurrencyRupee(false);
+                setcurrencyEuro(false);
               }}
             >
               DOLLAR

@@ -15,7 +15,7 @@ export default function Dashboard() {
   const getallTransaction = async () => {
     await axios({
       method: "POST",
-      url: "https://cryptofolio-backstack-aiwo.onrender.com/wallet/getwalletTransaction",
+      url: "http://localhost:3001/wallet/getwalletTransaction",
       data: {
         login: login,
       },
@@ -58,7 +58,7 @@ export default function Dashboard() {
   const getamount = async () => {
     await axios({
       method: "POST",
-      url: "https://cryptofolio-backstack-aiwo.onrender.com/wallet/getwalletAmount",
+      url: "http://localhost:3001/wallet/getwalletAmount",
       data: {
         login: login,
       },
@@ -72,14 +72,14 @@ export default function Dashboard() {
         Math.ceil(`${res.data[0].Amount}`).toLocaleString("en-IN", {
           maximumFractionDigits: 2,
           style: "currency",
-          currency: "INR",
+          currency: "EUR",
         })
       );
       setinv(
         Math.ceil(`${res.data[0].Invested}`).toLocaleString("en-IN", {
           maximumFractionDigits: 2,
           style: "currency",
-          currency: "INR",
+          currency: "EUR",
         })
       );
     });
@@ -95,7 +95,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchuserdata = async () => {
       const response = await fetch(
-        "https://cryptofolio-backstack-aiwo.onrender.com/dashboard/userdetails",
+        "http://localhost:3001/dashboard/userdetails",
         {
           method: "POST",
           body: JSON.stringify({ UserId: userid }),
@@ -241,7 +241,7 @@ export default function Dashboard() {
                                 Amount
                               </div>
                               <div className="text-center font-bold lg:m-2">
-                                ₹{value.Amount}
+                                Є{value.Amount}
                               </div>
                             </div>
                           </div>

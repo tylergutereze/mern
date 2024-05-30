@@ -11,7 +11,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(
   cors({
-    origin: "https://cryptofolio-full-stack-1.vercel.app",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -35,7 +35,7 @@ mongoose.set("strictQuery", true);
 //here are routes for backend calls
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://cryptofolio-full-stack-1.vercel.app");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
     "Access-Control-Allow-Origin",
     "Origin,X-Requested-With,Content-Type,Accept",
